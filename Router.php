@@ -80,4 +80,13 @@ class Router
             call_user_func($fn);
         }
     }
+    /**
+     * Outputs appropriate view to the user.
+     * 
+     * @return void
+     */
+    public function render()
+    {
+
+    }
 }
