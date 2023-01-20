@@ -10,6 +10,7 @@
  */
 
 namespace User\BeerWebsite;
+use User\BeerWebsite\model\Data;
 
 /**
  * Router
@@ -25,6 +26,17 @@ class Router
 {
     protected array $get_requests = [];
     protected array $post_requests = [];
+    public ?Data $db = null;
+
+    /**
+     * Constructor for data instance
+     * 
+     * @param $db db instance
+     */
+    public function __construct($db)
+    {
+        $this->db = $db;
+    }
     
     /**
      * Populate array of get requests with urls and corresponding methods
@@ -77,7 +89,7 @@ class Router
         if ($fn === null) {
             echo 'page not found';
         } else {
-            call_user_func($fn);
+            call_user_func($fn, $this);
         }
     }
     /**
