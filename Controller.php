@@ -13,6 +13,8 @@
  use User\BeerWebsite\model\Data;
  use User\BeerWebsite\Router;
 
+use function PHPSTORM_META\type;
+
 /**
  * Controller
  * 
@@ -35,7 +37,8 @@ class Controller
     public static function index(Router $router)
     {
         echo 'index page is visited with get request';
-        //$router->render();
+        echo '<br>';
+        $router->render('index');
     }
 
     /**
@@ -52,38 +55,69 @@ class Controller
     public static function search(Router $router)
     {
         echo 'search process started';
-        $keyword = $_GET['keyword'] ?? null;
-        $clicked = $_GET['clicked'] ?? null;
+        $keyword = $_POST['keyword'] ?? null;
+        $clicked = $_POST['clicked'] ?? null;
+        echo "this was entered: ".$keyword;
+        echo "this was clicked: ".$clicked;
         if ($keyword) {
             $data = $router->db->fetchData('beer_name='.$keyword);
+            if (gettype($data) === 'string') {
+                echo 'error occured: '.$data;
+                $router->getData();
+            } else if (empty($data)) {
+                echo 'beer not found';
+                $router->getData();
+            } else {
+                $router->getData();
+            }
             //$router->render(); //display names of beers in dropdwon or error
         } else if ($clicked) {
             $data = $router->db->fetchData('beer_name='.$clicked);
-            //format as beer object
-            $beer = $router->db->jsonToBeerObj($data[0]);
-            //save on db
-            $router->db->saveOnDB($beer);
-            //get from db using name stored in $clicked
-            $beerToRender = $router->db->getFromDB($clicked);
-            //pass to render
-            echo '<pre>';
-            var_dump($beerToRender); 
-            echo '</pre>';
+            if (gettype($data) === 'string') {
+                echo 'error occured: '.$data;
+            } else if (empty($data)) {
+                echo 'beer not found';
+            } else {
+                //format as beer object
+                $beer = $router->db->jsonToBeerObj($data[0]);
+                //save on db
+                $router->db->saveOnDB($beer);
+                //get from db using name stored in $clicked
+                $beerToRender = $router->db->getFromDB($clicked);
+                //pass to render
+                echo '<pre>';
+                var_dump($beerToRender); 
+                echo '</pre>';
 
-            //$router->render();
+                //$router->getData();
+            }
+            
         }
       
     }
 
     /**
-     * Get/post requests on storedData page are handled by this function.
+     * Get/post requests on beers page are handled by this function.
      * 
      * @param Router $router router instance to access data instance
      * 
      * @return void
      */
-    public static function storedData(Router $router)
+    public static function beers(Router $router)
     {
         echo 'stored data page visited';
+        $router->render('beers');
+    }
+    /**
+     * Get/post requests on contacts page are handled by this function.
+     * 
+     * @param Router $router router instance to access data instance
+     * 
+     * @return void
+     */
+    public static function contacts(Router $router)
+    {
+        echo 'contacts data page visited';
+        $router->render('contacts');
     }
 }

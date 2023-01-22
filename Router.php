@@ -97,8 +97,8 @@ class Router
      * 
      * @return void
      */
-    public function render()
+    public function render($url)
     {
-
+        include __DIR__."/views/$url.php";
     }
 }

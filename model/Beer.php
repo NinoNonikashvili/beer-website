@@ -31,8 +31,8 @@ class Beer
      * Constructor to initialize properties
      * 
      * @param $name         beer name
-     * @param $first_brewed first brewed data
      * @param $description  history
+     * @param $first_brewed first brewed data
      * @param $food_pairing foods that goes with it.
      * 
      * @return void

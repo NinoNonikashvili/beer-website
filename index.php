@@ -21,12 +21,14 @@ use User\BeerWebsite\model\Data;
 $db = new Data();
 $router = new Router($db);
 
-$router->fillGetArray('index', [Controller::class, 'index']);
+$router->fillGetArray('/index', [Controller::class, 'index']);
 $router->fillGetArray('/', [Controller::class, 'index']);
-$router->fillPostArray('index', [Controller::class, 'index']);
-$router->fillGetArray('/search', [Controller::class, 'search']);
-$router->fillGetArray('/storedData', [Controller::class, 'storedData']);
-$router->fillPostArray('/storedData', [Controller::class, 'storedData']);
+$router->fillPostArray('/index', [Controller::class, 'index']);
+$router->fillPostArray('/search', [Controller::class, 'search']);
+$router->fillGetArray('/beers', [Controller::class, 'beers']);
+$router->fillPostArray('/beers', [Controller::class, 'beers']);
+$router->fillGetArray('/contacts', [Controller::class, 'contacts']);
+$router->fillPostArray('/contacts', [Controller::class, 'contacts']);
 
 $router->resolve();
 

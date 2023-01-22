@@ -63,7 +63,8 @@ class Data
      */
     public function saveOnDB(Beer $beer)
     {
-        $statement = $this->pdo->prepare('INSERT INTO beers(name, first_brewed, description, food_pairing) VALUES(:name, :first_brewed, :description, :food_pairing)');
+        //IGNORE ensures that there wont be duplicate rows for similar beers.
+        $statement = $this->pdo->prepare('INSERT IGNORE INTO beers(name, first_brewed, description, food_pairing) VALUES(:name, :first_brewed, :description, :food_pairing)');
         $statement->bindValue(':name', $beer->getname());
         $statement->bindValue(':first_brewed', $beer->getdate());
         $statement->bindValue(':description', $beer->getDescription());
