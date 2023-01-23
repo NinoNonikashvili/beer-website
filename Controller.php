@@ -36,8 +36,8 @@ class Controller
      */
     public static function index(Router $router)
     {
-        echo 'index page is visited with get request';
-        echo '<br>';
+        // echo 'index page is visited with get request';
+        // echo '<br>';
         $router->render('index');
     }
 
@@ -54,29 +54,36 @@ class Controller
      */
     public static function search(Router $router)
     {
-        echo 'search process started';
+        // echo 'search process started';
         $keyword = $_POST['keyword'] ?? null;
         $clicked = $_POST['clicked'] ?? null;
-        echo "this was entered: ".$keyword;
-        echo "this was clicked: ".$clicked;
-        if ($keyword) {
+        // echo "this was entered: ";
+        // var_dump($keyword);
+        // echo "this was clicked: ";
+        // var_dump($clicked);
+        if ($keyword !== null) {
+            if ($keyword === '') {
+                header('Location: /');
+            }
             $data = $router->db->fetchData('beer_name='.$keyword);
             if (gettype($data) === 'string') {
-                echo 'error occured: '.$data;
-                $router->getData();
+                //error occured
+                $router->render('index', null, null, $data);
             } else if (empty($data)) {
-                echo 'beer not found';
-                $router->getData();
+                //beer was not found
+                $router->render('index', null, null, 'Beer Not Found');
             } else {
-                $router->getData();
+                $router->render('index', $data);
             }
             //$router->render(); //display names of beers in dropdwon or error
-        } else if ($clicked) {
+        } else if ($clicked !== null) {
             $data = $router->db->fetchData('beer_name='.$clicked);
             if (gettype($data) === 'string') {
-                echo 'error occured: '.$data;
+                //error occured
+                $router->render('index', null, null, $data);
             } else if (empty($data)) {
-                echo 'beer not found';
+                //beer was not found
+                $router->render('index', null, null, 'Beer Not Found');
             } else {
                 //format as beer object
                 $beer = $router->db->jsonToBeerObj($data[0]);
@@ -84,12 +91,12 @@ class Controller
                 $router->db->saveOnDB($beer);
                 //get from db using name stored in $clicked
                 $beerToRender = $router->db->getFromDB($clicked);
-                //pass to render
-                echo '<pre>';
-                var_dump($beerToRender); 
-                echo '</pre>';
+                // //pass to render
+                // echo '<pre>';
+                // var_dump($beerToRender); 
+                // echo '</pre>';
 
-                //$router->getData();
+                $router->render('index', null, $beerToRender);
             }
             
         }
@@ -105,7 +112,7 @@ class Controller
      */
     public static function beers(Router $router)
     {
-        echo 'stored data page visited';
+        // echo 'stored data page visited';
         $router->render('beers');
     }
     /**
@@ -117,7 +124,7 @@ class Controller
      */
     public static function contacts(Router $router)
     {
-        echo 'contacts data page visited';
+        // echo 'contacts data page visited';
         $router->render('contacts');
     }
 }

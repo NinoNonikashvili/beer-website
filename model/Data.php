@@ -64,8 +64,9 @@ class Data
     public function saveOnDB(Beer $beer)
     {
         //IGNORE ensures that there wont be duplicate rows for similar beers.
-        $statement = $this->pdo->prepare('INSERT IGNORE INTO beers(name, first_brewed, description, food_pairing) VALUES(:name, :first_brewed, :description, :food_pairing)');
+        $statement = $this->pdo->prepare('INSERT IGNORE INTO beers(name, img, first_brewed, description, food_pairing) VALUES(:name, :img, :first_brewed, :description, :food_pairing)');
         $statement->bindValue(':name', $beer->getname());
+        $statement->bindValue(':img', $beer->getImg());
         $statement->bindValue(':first_brewed', $beer->getdate());
         $statement->bindValue(':description', $beer->getDescription());
         $statement->bindValue(':food_pairing', $beer->getFood());
@@ -102,6 +103,6 @@ class Data
      */
     public function jsonToBeerObj($jsonObj)
     {
-        return new Beer($jsonObj->name, $jsonObj->description, $jsonObj->first_brewed, $jsonObj->food_pairing);
+        return new Beer($jsonObj->name, $jsonObj->image_url, $jsonObj->description, $jsonObj->first_brewed, $jsonObj->food_pairing);
     }
 }

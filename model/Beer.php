@@ -23,6 +23,7 @@ namespace User\BeerWebsite\model;
 class Beer
 {
     protected string $name;
+    protected string $img;
     protected string $first_brewed;
     protected string $description;
     protected array $food_pairing;
@@ -31,15 +32,17 @@ class Beer
      * Constructor to initialize properties
      * 
      * @param $name         beer name
+     * @param $img          image url
      * @param $description  history
      * @param $first_brewed first brewed data
      * @param $food_pairing foods that goes with it.
      * 
      * @return void
      */
-    public function __construct($name, $description, $first_brewed, $food_pairing)
+    public function __construct($name, $img, $description, $first_brewed, $food_pairing)
     {
         $this->name = $name;
+        $this->img = $img;
         $this->first_brewed = $first_brewed;
         $this->description = $description;
         $this->food_pairing = $food_pairing;
@@ -52,6 +55,15 @@ class Beer
     public function getName()
     {
         return $this->name;
+    }
+    /**
+     * Getter for image
+     * 
+     * @return $img
+     */
+    public function getImg()
+    {
+        return $this->img;
     }
     /**
      * Getter for first_brewed
