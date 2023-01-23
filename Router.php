@@ -95,10 +95,15 @@ class Router
     /**
      * Outputs appropriate view to the user.
      * 
+     * @param $url name of the page to render
+     * 
      * @return void
      */
-    public function render($url)
+    public function render($url, $suggestions = null, $beer = null, $error = null)
     {
+        $errorToShow = $error;
+        $beerToDisplay = $beer;
+        $products = $suggestions;
         include __DIR__."/views/$url.php";
     }
 }
