@@ -33,14 +33,16 @@
             </div>
         <?php endif ?>
         <?php if ($beerToDisplay !== null) : ?>
-                <div class="rounded-md overflow-hidden max-w-xl shadow-md bg-gray-200 mb-10 pt-2">  <!--card -->
-                    <img class="mx-auto h-12"src="<?php echo $beerToDisplay[0]['img'] ?>" alt="">
-                    <div class="w-full flex flex-col items-center py-5 px-4">
-                        <h2 class="font-bold"><?php echo $beerToDisplay[0]['name'] ?></h2>
+                <div class="rounded-md grid grid-rows-[8] overflow-hidden shadow-lg shadow-slate-300 bg-yellow-300 pt-4">  <!--card -->
+                    <img class="h-28 mx-auto row-span-2"src="<?php echo $beerToDisplay[0]['img'] ?>" alt="">
+                    <div class="w-full py-3 px-4 row-span-1">
+                        <h2 class="font-bold text-center mb-4"><?php echo $beerToDisplay[0]['name'] ?></h2>
+                    </div> 
+                    <div class="w-full py-3 px-4 row-span-4"> 
                         <h3 class="text-gray-500 text-sm text-center"><?php echo $beerToDisplay[0]['description'] ?></h3>
                     </div>
-                    <div class="w-full flex justify-start bg-yellow-200 py-5 px-4" >
-                        <h4>first brewed: <?php echo $beerToDisplay[0]['first_brewed'] ?></h4>
+                    <div class="w-full bg-yellow-700 py-5 px-4 self-end row-span-1" >
+                        <h4 class="text-gray-200">first brewed: <?php echo $beerToDisplay[0]['first_brewed'] ?></h4>
                     </div>
                 </div>
         <?php endif ?>

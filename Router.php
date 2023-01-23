@@ -99,11 +99,11 @@ class Router
      * 
      * @return void
      */
-    public function render($url, $suggestions = null, $beer = null, $error = null)
+    public function render($url, $beers = null, $beer = null, $error = null)
     {
         $errorToShow = $error;
         $beerToDisplay = $beer;
-        $products = $suggestions;
+        $products = $beers; //suggested beers for index page, beers array for beers page
         include __DIR__."/views/$url.php";
     }
 }

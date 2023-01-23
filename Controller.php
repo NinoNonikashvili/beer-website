@@ -112,8 +112,8 @@ class Controller
      */
     public static function beers(Router $router)
     {
-        // echo 'stored data page visited';
-        $router->render('beers');
+        $beers = $router->db->getFromDB();
+        $router->render('beers', $beers);
     }
     /**
      * Get/post requests on contacts page are handled by this function.

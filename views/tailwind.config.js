@@ -18,6 +18,9 @@ module.exports = {
       },
       colors: {
         transparent: 'transparent'
+      },
+      gridTemplateColumns: {
+        'autofill_md': 'repeat(auto-fill, minmax(200, 450))'
       }
     },
   },
