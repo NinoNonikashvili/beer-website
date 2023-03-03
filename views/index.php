@@ -14,7 +14,8 @@
 
         <form action="search" method="post" class="md:w-nintyper w-full mb-8">
             <div class="w-full grid grid-cols-3 gap-1 ">
-                <input class="col-span-2  border-gray-500 border-2 rounded-md py-4 px-3 focus:outline-none" type="search" name="keyword" id="keyword" placeholder="type beer name...">
+                
+                <input class="col-span-2  border-gray-500 border-2 rounded-md py-4 px-3 focus:outline-none" type="search" name="keyword" id="keyword" placeholder="type beer name..." value="<?php echo $keyword ?>" >
                 <button class="col-span-1 text-xl sm:text-2xl px-2 rounded-md bg-yellow-400"type="submit">search</button>
             </div>
         </form>
@@ -33,7 +34,7 @@
             </div>
         <?php endif ?>
         <?php if ($beerToDisplay !== null) : ?>
-                <div class="rounded-md grid grid-rows-[8] overflow-hidden shadow-lg shadow-slate-300 bg-yellow-300 pt-4">  <!--card -->
+                <div class="rounded-md grid max-w-xl mx-auto overflow-hidden shadow-lg shadow-slate-300 bg-yellow-300 pt-4">  <!--card -->
                     <img class="h-28 mx-auto row-span-2"src="<?php echo $beerToDisplay[0]['img'] ?>" alt="">
                     <div class="w-full py-3 px-4 row-span-1">
                         <h2 class="font-bold text-center mb-4"><?php echo $beerToDisplay[0]['name'] ?></h2>
