@@ -9,8 +9,9 @@
 ## Overview
 - This project displays a website where a user can find an information(hostory, food-pairing, date of first brew) about a beer. on the beers page a user can see the already searched beers.
 - beers are retrieved from https://punkapi.com/documentation/v2 api and saved on mysql database.
+- the design is responsive, mobile-first approach.
 
-### Screenshots of desktop, tablet and mobile sizes
+### Screenshots
 
 <div width="100%">
       <img
@@ -31,7 +32,6 @@
       />
       <img
         src="https://user-images.githubusercontent.com/61002720/222709760-d851371d-f4c0-4944-a7f4-ce8e20df7244.png"
-
         width="30%"
         align="top"
       />
