@@ -99,7 +99,7 @@ class Router
      * 
      * @return void
      */
-    public function render($url, $beers = null, $beer = null, $error = null)
+    public function render($url, $beers = null, $beer = null, $error = null, $keyword = null)
     {
         $errorToShow = $error;
         $beerToDisplay = $beer;

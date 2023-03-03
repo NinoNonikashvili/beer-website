@@ -65,6 +65,7 @@ class Controller
             if ($keyword === '') {
                 header('Location: /');
             }
+            $keyword = str_replace(" ", "_", $keyword);
             $data = $router->db->fetchData('beer_name='.$keyword);
             if (gettype($data) === 'string') {
                 //error occured
@@ -73,17 +74,19 @@ class Controller
                 //beer was not found
                 $router->render('index', null, null, 'Beer Not Found');
             } else {
-                $router->render('index', $data);
+                $keyword = str_replace("_", " ", $keyword);
+                $router->render('index', $data, null, null, $keyword);
             }
             //$router->render(); //display names of beers in dropdwon or error
         } else if ($clicked !== null) {
+            $clicked = str_replace(" ", "_", $clicked);
             $data = $router->db->fetchData('beer_name='.$clicked);
             if (gettype($data) === 'string') {
                 //error occured
                 $router->render('index', null, null, $data);
             } else if (empty($data)) {
                 //beer was not found
-                $router->render('index', null, null, 'Beer Not Found');
+                $router->render('index', null, null, 'Beer Not Found', $clicked);
             } else {
                 //format as beer object
                 $beer = $router->db->jsonToBeerObj($data[0]);
@@ -95,8 +98,8 @@ class Controller
                 // echo '<pre>';
                 // var_dump($beerToRender); 
                 // echo '</pre>';
-
-                $router->render('index', null, $beerToRender);
+                $clicked = str_replace(" ", "_", $clicked);
+                $router->render('index', null, $beerToRender, null, $clicked);
             }
             
         }
